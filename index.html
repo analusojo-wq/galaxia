@@ -67,10 +67,10 @@
         <div class="bg-purple-950/85 border border-purple-500/40 p-6 md:p-8 rounded-2xl max-w-md w-full mx-4 shadow-[0_0_40px_rgba(168,85,247,0.4)] text-center relative">
             <button onclick="cerrarModal()" class="absolute top-4 right-4 text-purple-300 hover:text-white text-xl font-bold">&times;</button>
             <h2 id="modal-title" class="text-2xl font-bold text-pink-200 mb-2 tracking-wide"></h2>
-            <p id="modal-message" class="text-purple-100/90 text-sm md:text-base mb-4 leading-relaxed"></p>
+            <p id="modal-message" class="text-purple-100/90 text-sm md:text-base mb-6 leading-relaxed"></p>
             
-            <!-- Reproductor integrado de YouTube con canciones reales -->
-            <div id="audio-player-container" class="mb-5 rounded-xl overflow-hidden bg-black/40 shadow-inner flex justify-center"></div>
+            <!-- Botón de artista real garantizado que abre la canción sin bloqueos -->
+            <div id="audio-player-container" class="mb-6 flex justify-center"></div>
 
             <button onclick="cerrarModal()" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-medium px-6 py-2 rounded-full transition shadow-lg">
                 Volver al cosmos
@@ -93,15 +93,15 @@
             universe.appendChild(star);
         }
 
-        // 2. Repertorio con canciones reales de artistas y sus IDs de YouTube limpios
+        // 2. Repertorio con canciones reales de artistas y enlaces directos a YouTube
         const repertorioCanciones = [
-            { nombre: "The Beatles - Here Comes The Sun", youtubeId: "KQetemGBVtw", mensaje: "Incluso en los días nublados, tu energía ilumina todo a tu alrededor." },
-            { nombre: "Coldplay - Yellow", youtubeId: "yKNxeF4KMsY", mensaje: "El universo es enorme, pero coincidir con vos es lo más increíble de todo." },
-            { nombre: "Eagles - Hotel California", youtubeId: "EqPtz5qN7HM", mensaje: "Recordá que tu luz brilla más fuerte que cualquier estrella en este cielo." },
-            { nombre: "Guns N' Roses - Sweet Child O' Mine", youtubeId: "1w7OgIMMRc4", mensaje: "Un pequeño recordatorio de que sos capaz de lograr todo lo que te proponés." },
-            { nombre: "The Police - Every Breath You Take", youtubeId: "OMOGaugKpzs", mensaje: "Gracias por hacer que este viaje esté lleno de risas y momentos únicos." },
-            { nombre: "Van Morrison - Brown Eyed Girl", youtubeId: "Ufmcc_SFwAw", mensaje: "Tu sonrisa brilla más que todas las constelaciones juntas." },
-            { nombre: "Boston - More Than A Feeling", youtubeId: "SSR6ZzjDZ94", mensaje: "Hay lugares en la galaxia que se sienten exactamente como estar a tu lado." }
+            { nombre: "The Beatles - Here Comes The Sun", youtubeUrl: "https://www.youtube.com/watch?v=KQetemGBVtw", mensaje: "Incluso en los días nublados, tu energía ilumina todo a tu alrededor." },
+            { nombre: "Coldplay - Yellow", youtubeUrl: "https://www.youtube.com/watch?v=yKNxeF4KMsY", mensaje: "El universo es enorme, pero coincidir con vos es lo más increíble de todo." },
+            { nombre: "Eagles - Hotel California", youtubeUrl: "https://www.youtube.com/watch?v=EqPtz5qN7HM", mensaje: "Recordá que tu luz brilla más fuerte que cualquier estrella en este cielo." },
+            { nombre: "Guns N' Roses - Sweet Child O' Mine", youtubeUrl: "https://www.youtube.com/watch?v=1w7OgIMMRc4", mensaje: "Un pequeño recordatorio de que sos capaz de lograr todo lo que te proponés." },
+            { nombre: "The Police - Every Breath You Take", youtubeUrl: "https://www.youtube.com/watch?v=OMOGaugKpzs", mensaje: "Gracias por hacer que este viaje esté lleno de risas y momentos únicos." },
+            { nombre: "Van Morrison - Brown Eyed Girl", youtubeUrl: "https://www.youtube.com/watch?v=Ufmcc_SFwAw", mensaje: "Tu sonrisa brilla más que todas las constelaciones juntas." },
+            { nombre: "Boston - More Than A Feeling", youtubeUrl: "https://www.youtube.com/watch?v=SSR6ZzjDZ94", mensaje: "Hay lugares en la galaxia que se sienten exactamente como estar a tu lado." }
         ];
 
         const galaxyMap = document.getElementById('galaxy-map');
@@ -127,7 +127,7 @@
             const datosUnicos = {
                 titulo: `Constelación #${i + 1}`,
                 mensaje: item.mensaje,
-                youtubeId: item.youtubeId,
+                youtubeUrl: item.youtubeUrl,
                 nombreCancion: item.nombre
             };
 
@@ -142,9 +142,12 @@
             modalTitle.innerText = estrella.titulo;
             modalMessage.innerText = estrella.mensaje;
             
-            // Reproductor integrado limpio con la canción del artista real
+            // Botón elegante de YouTube que reproduce la canción del artista real sin errores de iframe
             audioPlayerContainer.innerHTML = `
-                <iframe width="100%" height="160" src="https://www.youtube.com/embed/${estrella.youtubeId}?autoplay=1" title="${estrella.nombreCancion}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 12px;"></iframe>
+                <a href="${estrella.youtubeUrl}" target="_blank" class="flex items-center gap-3 bg-red-600 hover:bg-red-500 text-white font-bold px-6 py-3 rounded-full transition shadow-lg transform hover:scale-105">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    <span>Escuchar: ${estrella.nombreCancion}</span>
+                </a>
             `;
 
             modal.classList.remove('hidden');
@@ -153,7 +156,7 @@
 
         function cerrarModal() {
             modal.classList.add('opacity-0');
-            audioPlayerContainer.innerHTML = ''; // Esto detiene la música al cerrar el modal
+            audioPlayerContainer.innerHTML = '';
             setTimeout(() => {
                 modal.classList.add('hidden');
             }, 300);
