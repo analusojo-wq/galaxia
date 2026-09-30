@@ -62,14 +62,14 @@
     <!-- Contenedor de las estrellas interactivas -->
     <div id="galaxy-map" class="absolute inset-0"></div>
 
-    <!-- Ventana Modal de Mensajes y Canciones con Spotify -->
+    <!-- Ventana Modal de Mensajes y Canciones de Spotify -->
     <div id="modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-300">
         <div class="bg-purple-950/85 border border-purple-500/40 p-6 md:p-8 rounded-2xl max-w-md w-full mx-4 shadow-[0_0_40px_rgba(168,85,247,0.4)] text-center relative">
             <button onclick="cerrarModal()" class="absolute top-4 right-4 text-purple-300 hover:text-white text-xl font-bold">&times;</button>
             <h2 id="modal-title" class="text-2xl font-bold text-pink-200 mb-3 tracking-wide"></h2>
             <p id="modal-message" class="text-purple-100/90 text-sm md:text-base mb-4 leading-relaxed"></p>
             
-            <!-- Contenedor del reproductor de Spotify oficial -->
+            <!-- Reproductor oficial de Spotify -->
             <div id="audio-player-container" class="mb-6 rounded-xl overflow-hidden"></div>
 
             <button onclick="cerrarModal()" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-medium px-6 py-2 rounded-full transition shadow-lg">
@@ -93,7 +93,7 @@
             universe.appendChild(star);
         }
 
-        // 2. Repertorio con canciones de artistas reales en Spotify
+        // 2. Repertorio 100% de Spotify con artistas reales
         const repertorioCanciones = [
             { nombre: "Creedence - Have You Ever Seen The Rain", spotifyId: "2QPigfKMRE2QODRYG4r77W", mensaje: "El universo es enorme, pero coincidir con vos es lo más increíble de todo." },
             { nombre: "Eagles - Hotel California", spotifyId: "40riOy7x9W7GXjyGp4pjAv", mensaje: "Recordá que tu luz brilla más fuerte que cualquier estrella en este cielo." },
@@ -143,7 +143,6 @@
             modalTitle.innerText = estrella.titulo;
             modalMessage.innerText = estrella.mensaje;
             
-            // Reproductor limpio de Spotify
             audioPlayerContainer.innerHTML = `
                 <iframe src="https://open.spotify.com/embed/track/${estrella.spotifyId}?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             `;
