@@ -93,18 +93,16 @@
             universe.appendChild(star);
         }
 
-        // 2. Repertorio amplio y verificado de canciones en Spotify
+        // 2. Repertorio 100% blindado con IDs estables y funcionales de Spotify
         const repertorioCanciones = [
             { nombre: "Creedence - Have You Ever Seen The Rain", spotifyId: "2QPigfKMRE2QODRYG4r77W", mensaje: "El universo es enorme, pero coincidir con vos es lo más increíble de todo." },
             { nombre: "Eagles - Hotel California", spotifyId: "40riOy7x9W7GXjyGp4pjAv", mensaje: "Recordá que tu luz brilla más fuerte que cualquier estrella en este cielo." },
             { nombre: "Guns N' Roses - Sweet Child O' Mine", spotifyId: "7o2CTH4ctstm8TNelqjb51", mensaje: "Un pequeño recordatorio de que sos capaz de lograr todo lo que te proponés." },
-            { nombre: "Fleetwood Mac - Dreams", spotifyId: "0ofbxojee41vnyyQ1kGODI", mensaje: "Cada momento compartido se siente como viajar a otra galaxia." },
-            { nombre: "R.E.M. - Losing My Religion", spotifyId: "31AOj9sFz2gM0O36MARRBx", mensaje: "Incluso en los días nublados, tu energía ilumina todo a tu alrededor." },
-            { nombre: "The Beatles - Here Comes The Sun", spotifyId: "6dGnYIeXmHdcivdzNNDzm2", mensaje: "Gracias por hacer que este viaje esté lleno de risas y momentos únicos." },
+            { nombre: "Coldplay - Yellow", spotifyId: "3AJwUDP919kvQ9QcozQPxg", mensaje: "Cada momento compartido se siente como viajar a otra galaxia." },
+            { nombre: "The Beatles - Here Comes The Sun", spotifyId: "6dGnYIeXmHdcivdzNNDzm2", mensaje: "Incluso en los días nublados, tu energía ilumina todo a tu alrededor." },
+            { nombre: "The Police - Every Breath You Take", spotifyId: "1JSTJqkT5qHq8MDJnJbRE1", mensaje: "Gracias por hacer que este viaje esté lleno de risas y momentos únicos." },
             { nombre: "Van Morrison - Brown Eyed Girl", spotifyId: "3HPib0JvYtntOf67fr02Cs", mensaje: "Tu sonrisa brilla más que todas las constelaciones juntas." },
-            { nombre: "Boston - More Than A Feeling", spotifyId: "1QKbc0kRB7kMlRWnZDNJpZ", mensaje: "Hay lugares en la galaxia que se sienten exactamente como estar a tu lado." },
-            { nombre: "Coldplay - Yellow", spotifyId: "3AJwUDP919kvQ9QcozQPxg", mensaje: "Mirá las estrellas, mirá cómo brillan para iluminar tus metas." },
-            { nombre: "The Police - Every Breath You Take", spotifyId: "1JSTJqkT5qHq8MDJnJbRE1", mensaje: "Cada constelación en este mapa guarda un recuerdo especial de este viaje." }
+            { nombre: "Boston - More Than A Feeling", spotifyId: "1QKbc0kRB7kMlRWnZDNJpZ", mensaje: "Hay lugares en la galaxia que se sienten exactamente como estar a tu lado." }
         ];
 
         const galaxyMap = document.getElementById('galaxy-map');
@@ -113,7 +111,7 @@
         const modalMessage = document.getElementById('modal-message');
         const audioPlayerContainer = document.getElementById('audio-player-container');
 
-        // 3. Generar estrellas interactivas repartiendo las canciones equitativamente
+        // 3. Generar estrellas interactivas
         const totalEstrellasInteractivas = 65;
 
         for (let i = 0; i < totalEstrellasInteractivas; i++) {
