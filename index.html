@@ -66,11 +66,11 @@
     <div id="modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-300">
         <div class="bg-purple-950/85 border border-purple-500/40 p-6 md:p-8 rounded-2xl max-w-md w-full mx-4 shadow-[0_0_40px_rgba(168,85,247,0.4)] text-center relative">
             <button onclick="cerrarModal()" class="absolute top-4 right-4 text-purple-300 hover:text-white text-xl font-bold">&times;</button>
-            <h2 id="modal-title" class="text-2xl font-bold text-pink-200 mb-3 tracking-wide"></h2>
-            <p id="modal-message" class="text-purple-100/90 text-sm md:text-base mb-6 leading-relaxed"></p>
+            <h2 id="modal-title" class="text-2xl font-bold text-pink-200 mb-2 tracking-wide"></h2>
+            <p id="modal-message" class="text-purple-100/90 text-sm md:text-base mb-4 leading-relaxed"></p>
             
-            <!-- Botón oficial de reproducción en Spotify -->
-            <div id="audio-player-container" class="mb-6 flex flex-col items-center justify-center"></div>
+            <!-- Reproductor integrado de Spotify -->
+            <div id="audio-player-container" class="mb-5 rounded-xl overflow-hidden bg-black/40 p-1"></div>
 
             <button onclick="cerrarModal()" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-medium px-6 py-2 rounded-full transition shadow-lg">
                 Volver al cosmos
@@ -93,13 +93,12 @@
             universe.appendChild(star);
         }
 
-        // 2. Repertorio con enlaces directos seguros de Spotify
+        // 2. Repertorio con IDs ultra limpios compatibles con iframe web
         const repertorioCanciones = [
-            { nombre: "Creedence - Have You Ever Seen The Rain", spotifyId: "2QPigfKMRE2QODRYG4r77W", mensaje: "El universo es enorme, pero coincidir con vos es lo más increíble de todo." },
+            { nombre: "The Beatles - Here Comes The Sun", spotifyId: "6dGnYIeXmHdcivdzNNDzm2", mensaje: "Incluso en los días nublados, tu energía ilumina todo a tu alrededor." },
+            { nombre: "Coldplay - Yellow", spotifyId: "3AJwUDP919kvQ9QcozQPxg", mensaje: "El universo es enorme, pero coincidir con vos es lo más increíble de todo." },
             { nombre: "Eagles - Hotel California", spotifyId: "40riOy7x9W7GXjyGp4pjAv", mensaje: "Recordá que tu luz brilla más fuerte que cualquier estrella en este cielo." },
             { nombre: "Guns N' Roses - Sweet Child O' Mine", spotifyId: "7o2CTH4ctstm8TNelqjb51", mensaje: "Un pequeño recordatorio de que sos capaz de lograr todo lo que te proponés." },
-            { nombre: "Coldplay - Yellow", spotifyId: "3AJwUDP919kvQ9QcozQPxg", mensaje: "Cada momento compartido se siente como viajar a otra galaxia." },
-            { nombre: "The Beatles - Here Comes The Sun", spotifyId: "6dGnYIeXmHdcivdzNNDzm2", mensaje: "Incluso en los días nublados, tu energía ilumina todo a tu alrededor." },
             { nombre: "The Police - Every Breath You Take", spotifyId: "1JSTJqkT5qHq8MDJnJbRE1", mensaje: "Gracias por hacer que este viaje esté lleno de risas y momentos únicos." },
             { nombre: "Van Morrison - Brown Eyed Girl", spotifyId: "3HPib0JvYtntOf67fr02Cs", mensaje: "Tu sonrisa brilla más que todas las constelaciones juntas." },
             { nombre: "Boston - More Than A Feeling", spotifyId: "1QKbc0kRB7kMlRWnZDNJpZ", mensaje: "Hay lugares en la galaxia que se sienten exactamente como estar a tu lado." }
@@ -143,12 +142,9 @@
             modalTitle.innerText = estrella.titulo;
             modalMessage.innerText = estrella.mensaje;
             
-            // Botón directo a Spotify para garantizar reproducción sin errores de iframe
+            // Usamos el reproductor compacto oficial integrado que reproduce directo en la página
             audioPlayerContainer.innerHTML = `
-                <a href="https://open.spotify.com/track/${estrella.spotifyId}" target="_blank" class="flex items-center gap-3 bg-[#1DB954] hover:bg-[#1ed760] text-black font-bold px-6 py-3 rounded-full transition shadow-lg transform hover:scale-105">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.599-.12-.42.18-.78.6-.9 4.56-1.021 8.52-.6 11.64 1.32.36.18.48.66.24 1.08zm1.44-3.84c-.301.48-.9.66-1.38.36-3.24-1.98-8.16-2.58-11.94-1.41-.54.18-1.14-.12-1.32-.66-.18-.54.12-1.14.66-1.32 4.32-1.32 9.78-.66 13.56 1.62.48.3.66.9.36 1.41zm.12-4.02C13.44 7.38 7.8 7.14 4.56 8.13c-.66.2-1.38-.18-1.58-.84-.2-.66.18-1.38.84-1.58 3.78-1.14 10.14-.9 14.34 1.56.6.36.78 1.14.42 1.74-.36.6-1.14.78-1.74.42z"/></svg>
-                    <span>Escuchar: ${estrella.nombreCancion}</span>
-                </a>
+                <iframe src="https://open.spotify.com/embed/track/${estrella.spotifyId}?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius:12px;"></iframe>
             `;
 
             modal.classList.remove('hidden');
