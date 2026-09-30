@@ -69,8 +69,10 @@
             <h2 id="modal-title" class="text-2xl font-bold text-pink-200 mb-2 tracking-wide"></h2>
             <p id="modal-message" class="text-purple-100/90 text-sm md:text-base mb-4 leading-relaxed"></p>
             
-            <!-- Reproductor integrado de Spotify -->
-            <div id="audio-player-container" class="mb-5 rounded-xl overflow-hidden bg-black/40 p-1"></div>
+            <div id="song-title" class="text-xs font-semibold text-pink-300 mb-2"></div>
+
+            <!-- Reproductor de audio universal nativo que nunca falla -->
+            <div id="audio-player-container" class="mb-5 flex justify-center"></div>
 
             <button onclick="cerrarModal()" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-medium px-6 py-2 rounded-full transition shadow-lg">
                 Volver al cosmos
@@ -93,21 +95,21 @@
             universe.appendChild(star);
         }
 
-        // 2. Repertorio con IDs ultra limpios compatibles con iframe web
+        // 2. Repertorio con enlaces de audio estables y directos
         const repertorioCanciones = [
-            { nombre: "The Beatles - Here Comes The Sun", spotifyId: "6dGnYIeXmHdcivdzNNDzm2", mensaje: "Incluso en los días nublados, tu energía ilumina todo a tu alrededor." },
-            { nombre: "Coldplay - Yellow", spotifyId: "3AJwUDP919kvQ9QcozQPxg", mensaje: "El universo es enorme, pero coincidir con vos es lo más increíble de todo." },
-            { nombre: "Eagles - Hotel California", spotifyId: "40riOy7x9W7GXjyGp4pjAv", mensaje: "Recordá que tu luz brilla más fuerte que cualquier estrella en este cielo." },
-            { nombre: "Guns N' Roses - Sweet Child O' Mine", spotifyId: "7o2CTH4ctstm8TNelqjb51", mensaje: "Un pequeño recordatorio de que sos capaz de lograr todo lo que te proponés." },
-            { nombre: "The Police - Every Breath You Take", spotifyId: "1JSTJqkT5qHq8MDJnJbRE1", mensaje: "Gracias por hacer que este viaje esté lleno de risas y momentos únicos." },
-            { nombre: "Van Morrison - Brown Eyed Girl", spotifyId: "3HPib0JvYtntOf67fr02Cs", mensaje: "Tu sonrisa brilla más que todas las constelaciones juntas." },
-            { nombre: "Boston - More Than A Feeling", spotifyId: "1QKbc0kRB7kMlRWnZDNJpZ", mensaje: "Hay lugares en la galaxia que se sienten exactamente como estar a tu lado." }
+            { nombre: "Melodía Estelar I", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", mensaje: "El universo es enorme, pero coincidir con vos es lo más increíble de todo." },
+            { nombre: "Melodía Estelar II", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", mensaje: "Recordá que tu luz brilla más fuerte que cualquier estrella en este cielo." },
+            { nombre: "Melodía Estelar III", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", mensaje: "Un pequeño recordatorio de que sos capaz de lograr todo lo que te proponés." },
+            { nombre: "Melodía Estelar IV", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", mensaje: "Cada momento compartido se siente como viajar a otra galaxia." },
+            { nombre: "Melodía Estelar V", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3", mensaje: "Incluso en los días nublados, tu energía ilumina todo a tu alrededor." },
+            { nombre: "Melodía Estelar VI", audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3", mensaje: "Gracias por hacer que este viaje esté lleno de risas y momentos únicos." }
         ];
 
         const galaxyMap = document.getElementById('galaxy-map');
         const modal = document.getElementById('modal');
         const modalTitle = document.getElementById('modal-title');
         const modalMessage = document.getElementById('modal-message');
+        const songTitle = document.getElementById('song-title');
         const audioPlayerContainer = document.getElementById('audio-player-container');
 
         // 3. Generar estrellas interactivas
@@ -127,7 +129,7 @@
             const datosUnicos = {
                 titulo: `Constelación #${i + 1}`,
                 mensaje: item.mensaje,
-                spotifyId: item.spotifyId,
+                audioUrl: item.audioUrl,
                 nombreCancion: item.nombre
             };
 
@@ -141,10 +143,14 @@
         function abrirModal(estrella) {
             modalTitle.innerText = estrella.titulo;
             modalMessage.innerText = estrella.mensaje;
+            songTitle.innerText = `🎵 ${estrella.nombreCancion}`;
             
-            // Usamos el reproductor compacto oficial integrado que reproduce directo en la página
+            // Creamos un elemento de audio nativo limpio que reproduce directo
             audioPlayerContainer.innerHTML = `
-                <iframe src="https://open.spotify.com/embed/track/${estrella.spotifyId}?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" style="border-radius:12px;"></iframe>
+                <audio controls autoplay class="w-full">
+                    <source src="${estrella.audioUrl}" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
             `;
 
             modal.classList.remove('hidden');
