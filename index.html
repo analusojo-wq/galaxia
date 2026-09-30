@@ -62,15 +62,15 @@
     <!-- Contenedor de las estrellas interactivas -->
     <div id="galaxy-map" class="absolute inset-0"></div>
 
-    <!-- Ventana Modal de Mensajes y Canciones de Artistas -->
+    <!-- Ventana Modal de Mensajes y Canciones con Spotify -->
     <div id="modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden opacity-0 transition-opacity duration-300">
         <div class="bg-purple-950/85 border border-purple-500/40 p-6 md:p-8 rounded-2xl max-w-md w-full mx-4 shadow-[0_0_40px_rgba(168,85,247,0.4)] text-center relative">
             <button onclick="cerrarModal()" class="absolute top-4 right-4 text-purple-300 hover:text-white text-xl font-bold">&times;</button>
             <h2 id="modal-title" class="text-2xl font-bold text-pink-200 mb-3 tracking-wide"></h2>
             <p id="modal-message" class="text-purple-100/90 text-sm md:text-base mb-4 leading-relaxed"></p>
             
-            <!-- Contenedor del reproductor de YouTube optimizado para artistas -->
-            <div id="audio-player-container" class="mb-6 rounded-xl overflow-hidden border border-purple-500/30 bg-black/40"></div>
+            <!-- Contenedor del reproductor de Spotify oficial -->
+            <div id="audio-player-container" class="mb-6 rounded-xl overflow-hidden"></div>
 
             <button onclick="cerrarModal()" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-medium px-6 py-2 rounded-full transition shadow-lg">
                 Volver al cosmos
@@ -93,16 +93,16 @@
             universe.appendChild(star);
         }
 
-        // 2. Repertorio con canciones bonitas de artistas reales
+        // 2. Repertorio con canciones de artistas reales en Spotify
         const repertorioCanciones = [
-            { nombre: "Creedence Clearwater Revival - Have You Ever Seen The Rain", youtubeId: "GuJQSAiODqA", mensaje: "El universo es enorme, pero coincidir con vos es lo más increíble de todo." },
-            { nombre: "Eagles - Hotel California", youtubeId: "EqPtz5qN7HM", mensaje: "Recordá que tu luz brilla más fuerte que cualquier estrella en este cielo." },
-            { nombre: "Guns N' Roses - Sweet Child O' Mine", youtubeId: "1w7OgIMMRc4", mensaje: "Un pequeño recordatorio de que sos capaz de lograr todo lo que te proponés." },
-            { nombre: "Fleetwood Mac - Dreams", youtubeId: "mrZRURcb1cM", mensaje: "Cada momento compartido se siente como viajar a otra galaxia." },
-            { nombre: "R.E.M. - Losing My Religion", youtubeId: "xwtdhWltSIg", mensaje: "Incluso en los días nublados, tu energía ilumina todo a tu alrededor." },
-            { nombre: "The Beatles - Here Comes The Sun", youtubeId: "KQetemT1sWc", mensaje: "Gracias por hacer que este viaje esté lleno de risas y momentos únicos." },
-            { nombre: "Van Morrison - Brown Eyed Girl", youtubeId: "Ufmhu-uJ6S0", mensaje: "Tu sonrisa brilla más que todas las constelaciones juntas." },
-            { nombre: "Boston - More Than A Feeling", youtubeId: "iCcOWCAgSZY", mensaje: "Hay lugares en la galaxia que se sienten exactamente como estar a tu lado." }
+            { nombre: "Creedence - Have You Ever Seen The Rain", spotifyId: "2QPigfKMRE2QODRYG4r77W", mensaje: "El universo es enorme, pero coincidir con vos es lo más increíble de todo." },
+            { nombre: "Eagles - Hotel California", spotifyId: "40riOy7x9W7GXjyGp4pjAv", mensaje: "Recordá que tu luz brilla más fuerte que cualquier estrella en este cielo." },
+            { nombre: "Guns N' Roses - Sweet Child O' Mine", spotifyId: "7o2CTH4ctstm8TNelqjb51", mensaje: "Un pequeño recordatorio de que sos capaz de lograr todo lo que te proponés." },
+            { nombre: "Fleetwood Mac - Dreams", spotifyId: "0ofbxojee41vnyyQ1kGODI", mensaje: "Cada momento compartido se siente como viajar a otra galaxia." },
+            { nombre: "R.E.M. - Losing My Religion", spotifyId: "31AOj9sFz2gM0O36MARRBx", mensaje: "Incluso en los días nublados, tu energía ilumina todo a tu alrededor." },
+            { nombre: "The Beatles - Here Comes The Sun", spotifyId: "6dGnYIeXmHdcivdzNNDzm2", mensaje: "Gracias por hacer que este viaje esté lleno de risas y momentos únicos." },
+            { nombre: "Van Morrison - Brown Eyed Girl", spotifyId: "3HPib0JvYtntOf67fr02Cs", mensaje: "Tu sonrisa brilla más que todas las constelaciones juntas." },
+            { nombre: "Boston - More Than A Feeling", spotifyId: "1QKbc0kRB7kMlRWnZDNJpZ", mensaje: "Hay lugares en la galaxia que se sienten exactamente como estar a tu lado." }
         ];
 
         const galaxyMap = document.getElementById('galaxy-map');
@@ -128,7 +128,7 @@
             const datosUnicos = {
                 titulo: `Constelación #${i + 1}`,
                 mensaje: item.mensaje,
-                youtubeId: item.youtubeId,
+                spotifyId: item.spotifyId,
                 nombreCancion: item.nombre
             };
 
@@ -143,10 +143,9 @@
             modalTitle.innerText = estrella.titulo;
             modalMessage.innerText = estrella.mensaje;
             
-            // Usamos youtube-nocookie y los permisos correctos para evitar bloqueos y el error 153
+            // Reproductor limpio de Spotify
             audioPlayerContainer.innerHTML = `
-                <div class="text-xs text-purple-300 py-1.5 px-2 bg-purple-950/60 truncate border-b border-purple-500/20">🎵 ${estrella.nombreCancion}</div>
-                <iframe width="100%" height="160" src="https://www.youtube-nocookie.com/embed/${estrella.youtubeId}?autoplay=1&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe src="https://open.spotify.com/embed/track/${estrella.spotifyId}?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             `;
 
             modal.classList.remove('hidden');
@@ -155,7 +154,7 @@
 
         function cerrarModal() {
             modal.classList.add('opacity-0');
-            audioPlayerContainer.innerHTML = ''; // Detiene la canción al cerrar la ventana
+            audioPlayerContainer.innerHTML = '';
             setTimeout(() => {
                 modal.classList.add('hidden');
             }, 300);
